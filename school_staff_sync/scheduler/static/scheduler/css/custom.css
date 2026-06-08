@@ -1,0 +1,99 @@
+:root {
+    --olive: #4B5320;
+    --olive-light: #606F49;
+    --olive-dark: #3A4121;
+    --bg-light: #F9FAFC; /* slightly off-white for main background */
+    --white: #ffffff;
+    --text-dark: #1A1C18;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Navbar */
+.bg-olive {
+    background-color: var(--olive) !important;
+}
+
+.navbar-dark .navbar-brand {
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.navbar-dark .nav-link {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.navbar-dark .nav-link:hover {
+    color: #ffffff;
+}
+
+/* Cards */
+.card {
+    background-color: var(--white);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--olive-light);
+    border-color: var(--olive-light);
+    color: var(--white);
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--olive-dark);
+    border-color: var(--olive-dark);
+    color: var(--white);
+}
+
+.btn-outline-primary {
+    color: var(--olive);
+    border-color: var(--olive);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--olive);
+    color: var(--white);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Headers */
+h1, h2, h3, h4, h5 {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Forms */
+.form-control:focus {
+    border-color: var(--olive-light);
+    box-shadow: 0 0 0 0.25rem rgba(96, 111, 73, 0.25);
+}
+
+.badge.bg-success {
+    background-color: var(--olive-light) !important;
+}
