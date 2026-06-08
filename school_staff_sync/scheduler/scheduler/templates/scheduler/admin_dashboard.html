@@ -1,0 +1,33 @@
+{% extends 'scheduler/base.html' %}
+{% block content %}
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h4>Teachers</h4>
+            <p class="display-6">{{ total_teachers }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h4>Total Schedules</h4>
+            <p class="display-6">{{ total_schedules }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h4>Upcoming</h4>
+            <p class="display-6">{{ upcoming_schedules }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-center p-3">
+            <h4>Confirmations</h4>
+            <p class="display-6">{{ total_confirmations }}</p>
+        </div>
+    </div>
+</div>
+<div class="mt-4 text-center">
+    <a href="{% url 'schedule_create' %}" class="btn btn-primary">Create New Schedule</a>
+    <a href="{% url 'schedule_list' %}" class="btn btn-outline-secondary">Manage All Schedules</a>
+</div>
+{% endblock %}
