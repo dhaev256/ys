@@ -1,0 +1,31 @@
+{% extends 'scheduler/base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-header bg-beige">
+        <h3>All Schedules</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr><th>Teacher</th><th>Subject</th><th>Date</th><th>Time</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+                {% for s in schedules %}
+                <tr>
+                    <td>{{ s.teacher.username }}</td>
+                    <td>{{ s.subject }}</td>
+                    <td>{{ s.date }}</td>
+                    <td>{{ s.start_time|time:"H:i" }} - {{ s.end_time|time:"H:i" }}</td>
+                    <td>
+                        <a href="{% url 'schedule_update' s.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'schedule_delete' s.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5">No schedules created yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
