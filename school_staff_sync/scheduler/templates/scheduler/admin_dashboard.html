@@ -1,0 +1,45 @@
+{% extends 'scheduler/base.html' %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2 class="fw-bold mb-1">Admin Dashboard</h2>
+        <p class="text-muted">Overview of the school scheduling system</p>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-3">
+        <div class="card h-100 text-center p-4 border-0 shadow-sm">
+            <h5 class="text-muted fw-normal mb-3">Total Teachers</h5>
+            <p class="display-5 fw-bold mb-0" style="color: var(--olive-light);">{{ total_teachers }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 text-center p-4 border-0 shadow-sm">
+            <h5 class="text-muted fw-normal mb-3">Total Schedules</h5>
+            <p class="display-5 fw-bold mb-0" style="color: var(--olive-light);">{{ total_schedules }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 text-center p-4 border-0 shadow-sm">
+            <h5 class="text-muted fw-normal mb-3">Upcoming</h5>
+            <p class="display-5 fw-bold mb-0 text-primary">{{ upcoming_schedules }}</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card h-100 text-center p-4 border-0 shadow-sm">
+            <h5 class="text-muted fw-normal mb-3">Confirmations</h5>
+            <p class="display-5 fw-bold mb-0 text-success">{{ total_confirmations }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="card border-0 shadow-sm p-4 text-center bg-white">
+    <h4 class="mb-4 fw-bold">Quick Actions</h4>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a href="{% url 'schedule_create' %}" class="btn btn-primary px-4 py-2 fw-semibold">Create New Schedule</a>
+        <a href="{% url 'schedule_list' %}" class="btn btn-outline-primary px-4 py-2 fw-semibold">Manage All Schedules</a>
+        <a href="{% url 'teacher_list' %}" class="btn btn-outline-primary px-4 py-2 fw-semibold">Manage Teachers</a>
+    </div>
+</div>
+{% endblock %}
