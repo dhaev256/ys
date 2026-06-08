@@ -1,0 +1,60 @@
+{% extends 'scheduler/base.html' %}
+{% block content %}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="card border-0 shadow-sm p-4 p-md-5 text-center bg-white">
+            <div class="mb-4">
+                <span class="d-inline-flex align-items-center justify-content-center rounded-circle text-white"
+                      style="width: 60px; height: 60px; font-size: 1.8rem; background-color: var(--olive-light);">
+                    ✓
+                </span>
+            </div>
+            
+            <h3 class="fw-bold mb-2 text-dark">Teacher Account Created</h3>
+            <p class="text-muted mb-4">The account has been successfully registered. Please copy the temporary credentials below and share them with the user.</p>
+
+            <div class="bg-light p-4 rounded-3 text-start mb-4 border border-light-subtle">
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-semibold uppercase mb-1">Full Name</label>
+                    <div class="fs-5 fw-semibold text-dark">{{ teacher.name }}</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-semibold uppercase mb-1">Username</label>
+                    <div class="fs-5 fw-bold text-dark font-monospace" id="usernameField">{{ teacher.username }}</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-semibold uppercase mb-1">Generated Password</label>
+                    <div class="d-flex align-items-center justify-content-between bg-white border rounded px-3 py-2">
+                        <span class="fs-5 fw-bold text-dark font-monospace" id="passwordField">{{ teacher.password }}</span>
+                        <button class="btn btn-sm btn-outline-primary px-3 py-1 fw-semibold" onclick="copyPassword()">Copy</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label text-muted small fw-semibold uppercase mb-1">Designated Role</label>
+                    <div><span class="badge bg-success">{{ teacher.role }}</span></div>
+                </div>
+            </div>
+
+            <p class="text-danger small mb-4">
+                <strong>Important:</strong> For security reasons, this temporary password is only displayed once and cannot be retrieved later.
+            </p>
+
+            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                <a href="{% url 'teacher_list' %}" class="btn btn-primary px-4 py-2 fw-semibold">Go to Teacher List</a>
+                <a href="{% url 'teacher_create' %}" class="btn btn-outline-primary px-4 py-2 fw-semibold">Add Another User</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyPassword() {
+    var passwordText = document.getElementById("passwordField").innerText;
+    navigator.clipboard.writeText(passwordText).then(function() {
+        alert("Password copied to clipboard!");
+    }, function(err) {
+        console.error("Could not copy password: ", err);
+    });
+}
+</script>
+{% endblock %}
