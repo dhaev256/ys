@@ -1,0 +1,44 @@
+{% extends 'scheduler/base.html' %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2 class="fw-bold mb-1">My Teaching Schedule</h2>
+        <p class="text-muted">Manage your classes and availability</p>
+    </div>
+</div>
+
+<div class="row g-4 mt-1">
+    {% for schedule in schedules %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm">
+            <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <h5 class="card-title fw-bold text-dark mb-0">{{ schedule.subject }}</h5>
+                    {% if schedule.availability.is_confirmed %}
+                        <span class="badge bg-success rounded-pill px-3 py-2">Confirmed</span>
+                    {% else %}
+                        <span class="badge bg-warning text-dark rounded-pill px-3 py-2">Pending</span>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-4 text-muted small">
+                    <div class="mb-2"><strong>Date:</strong> {{ schedule.date }}</div>
+                    <div class="mb-2"><strong>Time:</strong> {{ schedule.start_time|time:"H:i" }} – {{ schedule.end_time|time:"H:i" }}</div>
+                    <div><strong>Room:</strong> {{ schedule.room|default:"TBA" }}</div>
+                </div>
+                
+                <div class="mt-auto">
+                    <a href="{% url 'update_availability' schedule.pk %}" class="btn btn-outline-primary w-100 py-2 fw-semibold">Update Availability</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="card border-0 shadow-sm p-5 text-center">
+            <h5 class="text-muted fw-normal mb-0">No classes assigned to you right now.</h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
