@@ -1,0 +1,75 @@
+{% extends 'scheduler/base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-1">All Schedules</h2>
+        <p class="text-muted mb-0">Manage and review all teaching sessions</p>
+    </div>
+    <a href="{% url 'schedule_create' %}" class="btn btn-primary px-4 fw-semibold">+ New Schedule</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="bg-olive text-white">
+                    <tr>
+                        <th class="ps-4 py-3">Teacher</th>
+                        <th class="py-3">Subject</th>
+                        <th class="py-3">Date</th>
+                        <th class="py-3">Time</th>
+                        <th class="py-3">Room</th>
+                        <th class="py-3">Photo</th>
+                        <th class="py-3 pe-4 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in schedules %}
+                    <tr>
+                        <td class="ps-4">
+                            <div class="d-flex align-items-center gap-3">
+                                {% if s.teacher.profile.photo %}
+                                    <img src="{{ s.teacher.profile.photo.url }}"
+                                         alt="{{ s.teacher.username }}"
+                                         class="rounded-circle"
+                                         style="width:38px;height:38px;object-fit:cover;">
+                                {% else %}
+                                    <span class="d-inline-flex align-items-center justify-content-center rounded-circle fw-bold text-white"
+                                          style="width:38px;height:38px;background:var(--olive-light);font-size:1rem;">
+                                        {{ s.teacher.username|slice:":1"|upper }}
+                                    </span>
+                                {% endif %}
+                                <div>
+                                    <div class="fw-semibold">{{ s.teacher.get_full_name|default:s.teacher.username }}</div>
+                                    <div class="text-muted small">{{ s.teacher.email }}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="fw-semibold">{{ s.subject }}</td>
+                        <td>{{ s.date }}</td>
+                        <td>{{ s.start_time|time:"H:i" }} – {{ s.end_time|time:"H:i" }}</td>
+                        <td>{{ s.room|default:"—" }}</td>
+                        <td>
+                            {% if s.photo %}
+                                <img src="{{ s.photo.url }}" alt="Session photo"
+                                     class="rounded" style="width:48px;height:38px;object-fit:cover;">
+                            {% else %}
+                                <span class="text-muted small">None</span>
+                            {% endif %}
+                        </td>
+                        <td class="pe-4 text-end">
+                            <a href="{% url 'schedule_update' s.pk %}" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+                            <a href="{% url 'schedule_delete' s.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-5">No schedules created yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
